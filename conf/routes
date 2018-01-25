@@ -1,0 +1,57 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                               controllers.HomeController.index
+
+# An example controller showing how to write asynchronous code
+GET     /message                        controllers.AsyncController.message
+
+
+# An example controller showing how to write asynchronous code
+GET     /about                     controllers.HomeController.about
+
+
+GET     /books                     controllers.BooksController.index
+
+GET     /books/titles              controllers.BooksController.titlesearch
+GET     /books/authors             controllers.BooksController.authorsearch
+
+
+GET     /books/user                controllers.BooksController.userindex
+GET     /books/create              controllers.BooksController.create
+GET     /books/:id                 controllers.BooksController.show(id :Integer)
+GET     /messages/:ownerid         controllers.BooksController.messages(ownerid :Integer)
+GET     /messages/save/:ownerid    controllers.MessagesController.save(ownerid :Integer)
+GET     /books/edit/:id            controllers.BooksController.edit(id :Integer)
+
++ nocsrf
+POST    /books/edit/:id            controllers.BooksController.update(id : Integer)
+
++ nocsrf
+POST    /books/create              controllers.BooksController.save
+GET     /books/delete/:id          controllers.BooksController.destroy(id : Integer)
+
+
+GET     /auth/signup               controllers.UsersController.register
+GET     /auth/logins               controllers.UsersController.logins
+GET     /mailbox                   controllers.UsersController.mailbox
+GET     /mailbox/delete/:id        controllers.MessagesController.destroy(id : Integer)
+
++ nocsrf
+POST    /auth/login                controllers.UsersController.login
+
++ nocsrf
+POST    /auth/updateuser           controllers.UsersController.updateuser
+
+GET     /auth/profile              controllers.UsersController.profile
+GET     /auth/logout               controllers.UsersController.logout
+
+
++ nocsrf
+POST    /auth/create                   controllers.UsersController.save
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

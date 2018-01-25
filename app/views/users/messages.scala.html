@@ -1,0 +1,31 @@
+@(messages : List[Message], isLogedIn : Boolean, Username : String)
+
+@layout("Mailbox", isLogedIn, Username) {
+
+    <link rel="stylesheet" href="@routes.Assets.versioned("css/books.css")">
+    <script type="text/javascript" src="@routes.Assets.versioned("js/message.js")"></script>
+
+    <h3>Mailbox</h3>
+
+    @for(message <- messages) {
+        <div class="row">
+            <input type="button" class="mail" name="Message" value="From: @message.author To: @message.receivername " id="messagebtn" />
+            <div class="messagediv" id="messagediv">
+                <textarea readonly class="messageshow" rows="4" >@message.title &#13;&#10;@message.message</textarea>
+
+                <div class="answerdiv" id="id">
+                    <a class="btn-default" href="@routes.BooksController.messages(message.authorid)">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        Respond
+                    </a>
+                    <a class="btn-default" href="@routes.MessagesController.destroy(message.id)">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+
+}
+
+}

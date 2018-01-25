@@ -1,0 +1,63 @@
+@(bookForm: Form[Message], books : List[Book] , isLogedIn : Boolean, userId : Integer, Username : String)
+
+@layout("Your Books", isLogedIn, Username) {
+    <link rel="stylesheet" href="@routes.Assets.versioned("css/library.css")">
+
+    <div id="tfheader">
+        @helper.form(action = routes.BooksController.titlesearch()){
+            @helper.input(bookForm("title")) { (id, name, value, args) =>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="@id" name="@name" class="form-control" placeholder="Search by title" required="required" @toHtmlArgs(args)>
+                            <button type="submit" class="btn btn-default">Search</button>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        @helper.form(action = routes.BooksController.authorsearch()){
+            @helper.input(bookForm("author")) { (id, name, value, args) =>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="@id" name="@name" class="form-control" placeholder="Search by author" required="required" @toHtmlArgs(args)>
+                            <button type="submit" class="btn btn-default">Search</button>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    @for(book <- books) {
+        @if(book.userid == userId){
+
+        <div id="login-box">
+            <div class="left">
+
+                <img src="@routes.Assets.versioned("images/book.jpg")" height="110px">
+
+            </div>
+            <div class="right">
+                <p>Title : @book.title</p>
+                <p>Author : @book.author</p>
+                <div class="inright">
+                    <a class="btn btn-success" href="@routes.BooksController.show(book.id)">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        Detail
+                    </a>
+                </div>
+            </div>
+            @if(book.availability==true) {
+                <div class="right2">
+                    <p>AVAILABLE!</p>
+                </div>
+            }
+        </div>
+
+    }
+    }
+}

@@ -1,0 +1,77 @@
+@(title : String, isLogedIn : Boolean, Username : String)(body: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>@title</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="@routes.Assets.versioned("css/bootstrap.min.css")">
+        <link rel="shortcut icon" type="image/x-icon" href="@routes.Assets.versioned("images/redbook.png")" />
+
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@routes.HomeController.index()">Dare To Share</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="@routes.HomeController.index()">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Home</a></li>
+                    <li class="active"><a href="@routes.BooksController.index()">
+                        <i class="glyphicon glyphicon-book"></i>
+                        Library </a>
+                    </li>
+                    @if(isLogedIn == true) {
+                        <li><a href="@routes.BooksController.userindex()">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            Your Books </a></li>
+                        <li><a href="@routes.BooksController.create()">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            Create Books </a></li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if(isLogedIn == false) {
+                        <li><a href="@routes.UsersController.register()"><span class="glyphicon glyphicon-user"></span>
+                            Sign Up</a></li>
+                        <li><a href="@routes.UsersController.logins()"><span class="glyphicon glyphicon-log-in"></span>
+                            Login</a></li>
+                    }
+                    @if(isLogedIn == true) {
+                        <li><a href="@routes.UsersController.mailbox()"><span class="glyphicon glyphicon-envelope"></span>
+                            Messages</a></li>
+                        <li><a href="@routes.UsersController.profile()"><span class="glyphicon glyphicon-user"></span>
+                            @Username</a></li>
+                        <li><a href="@routes.UsersController.logout()"><span class="glyphicon glyphicon-log-in"></span>
+                            Logout</a></li>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            @for(key <- Array("danger","info","success","warning")){
+                @if(flash.containsKey(key)){
+                    <div class="alert alert-@key">
+                        @flash.get(key)
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close"> <i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                }
+            }
+
+            @body
+        <script src="@routes.Assets.versioned("js/jquery-3.2.1.min.js")"></script>
+        <script src="@routes.Assets.versioned("js/popper.min.js")"></script>
+        <script src="@routes.Assets.versioned("js/bootstrap.bundle.min.js")"></script>
+        <script src="@routes.Assets.versioned("js/bootstrap.min.js")"></script>
+        @*<script src="@routes.Assets.versioned("js/custom.js")"></script>*@
+        </div>
+
+    </body>
+</html>

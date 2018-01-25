@@ -1,0 +1,37 @@
+@(messageForm : Form[Message], receiverId: Integer, isLogedIn : Boolean, Username : String)
+
+@layout("Message", isLogedIn, Username){
+
+    <link rel="stylesheet" href="@routes.Assets.versioned("css/books.css")">
+
+    <h3>Leave a message</h3>
+
+    @helper.form(action = routes.MessagesController.save(receiverId)){
+
+        @helper.input(messageForm("title")) { (id, name, value, args) =>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" id="@id" name="@name" class="form-control" placeholder="Title" required="required" @toHtmlArgs(args)>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+        }
+        @helper.input(messageForm("message")) { (id, name, value, args) =>
+            <div class="message">
+                <textarea name="message" id="message" class="form-control" rows="6" placeholder="Message" required></textarea>
+                <p class="help-block text-danger"></p>
+            </div>
+            <div id="success"></div>
+        }
+
+
+            <button type="submit" class="btn btn-default">Send Message</button>
+
+    }
+
+}

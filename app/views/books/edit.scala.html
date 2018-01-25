@@ -1,0 +1,17 @@
+@(bookForm : Form[Book], isLogedIn : Boolean, id : Integer, Username : String)
+@import helper._
+@import views.html.Partials._booksFormFields
+
+@layout("EditBook", isLogedIn, Username){
+    <h1>Edit Book</h1>
+
+    @helper.form(action = routes.BooksController.update(id)){
+
+    @_booksFormFields(bookForm)
+
+
+    <button class="btn btn-primary">
+        <i class="glyphicon glyphicon-ok"></i>
+        Edit Book</button>
+    }
+}

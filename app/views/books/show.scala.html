@@ -1,0 +1,46 @@
+@(book: Book, isLogedIn : Boolean, Username : String, UserId : Integer)
+@layout(book.title, isLogedIn, Username){
+
+    <link rel="stylesheet" href="@routes.Assets.versioned("css/books.css")">
+
+    <div id="book-box">
+        <div class="left">
+
+            <img src="@routes.Assets.versioned("images/book.jpg")" height="160px">
+
+        </div>
+        <div class="right">
+            <p>@book.title</p>
+            <p> Available : @book.availability</p>
+            <p> Price : @book.price $</p>
+            <p> Author : @book.author</p>
+            <p> Owner : @book.ownername</p>
+            <div class="inright">
+            @if(isLogedIn == true) {
+                @if(UserId == book.userid) {
+                    <a class="btn btn-primary" href="@routes.BooksController.edit(book.id)">
+                        <i class="glyphicon glyphicon-adjust"></i>
+                        Edit</a>
+                    <a class="btn btn-danger" href="@routes.BooksController.destroy(book.id)">
+                        <i class="glyphicon glyphicon-erase"></i>
+                        Delete</a>
+                }
+            }
+            </div>
+        </div>
+        <div class="down">
+        <p> Description </p>
+            <p> @book.description</p>
+        </div>
+        @if(UserId != book.userid) {
+            <div class="down2">
+                <p> Are you interested? </p>
+                <a class="btn btn-success" href="@routes.BooksController.messages(book.userid)">
+                    <i class="glyphicon glyphicon-adjust"></i>
+                    Message the owner!</a>
+            </div>
+        }
+    </div>
+
+
+}

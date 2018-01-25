@@ -1,0 +1,7 @@
+@(bookForm : Form[Book])
+
+@helper.inputText(bookForm("title"), 'class -> "form-control")
+@helper.inputText(bookForm("price"), 'class -> "form-control")
+@helper.inputText(bookForm("author"), 'class -> "form-control")
+@helper.inputText(bookForm("availability"), 'class -> "form-control")
+@helper.inputText(bookForm("description"), 'class -> "form-control")

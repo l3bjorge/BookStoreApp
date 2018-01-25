@@ -1,0 +1,16 @@
+@(userForm : Form[User], isLogedIn : Boolean, Username : String)
+@import helper._
+@import views.html.Partials._usersFormFields
+
+@layout("Profile", isLogedIn, Username){
+    <h1>Profile</h1>
+
+    @helper.form(action = routes.UsersController.updateuser()){
+
+        @_usersFormFields(userForm)
+
+        <button class="btn btn-primary">
+            <i class="glyphicon glyphicon-ok"></i>
+            Edit Profile</button>
+    }
+}
