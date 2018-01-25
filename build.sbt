@@ -22,4 +22,4 @@ libraryDependencies += "org.awaitility" % "awaitility" % "2.0.0" % Test
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
 
 
-libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
+// libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
